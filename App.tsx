@@ -1,21 +1,8 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
-
+import './global.css'
+import 'react-native-reanimated';
+import 'react-native-gesture-handler';
 import React, {useState, useEffect} from 'react';
-import 'react-native-reanimated'
-import 'react-native-gesture-handler'
-import {
-  View,
-  Text,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-} from 'react-native';
+import {View, Text, TextInput, TouchableOpacity} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {MotiView, MotiText} from 'moti';
 import Animated, {
@@ -25,8 +12,6 @@ import Animated, {
   withTiming,
   Easing,
 } from 'react-native-reanimated';
-
-import "./global.css";
 
 export default function App() {
   const [showInputs, setShowInputs] = useState(false);
@@ -76,149 +61,84 @@ export default function App() {
 
   return (
     <LinearGradient
-      style={styles.container}
-      colors={['#8007d9', '#333']}
-      start={{x: 0, y: 0}}
-      end={{x: 1, y: 1}}>
-      <View style={styles.topView}>
-        <MotiView
-          from={{translateY: -100, opacity: 0}}
-          animate={{translateY: 0, opacity: 1}}
-          transition={{type: 'timing', duration: 1000}}>
-          <Animated.View style={animatedStyle}>
-            <MotiText style={styles.topText}>🚀 Aw3s0m3 Pr0j3ct 🚀</MotiText>
-          </Animated.View>
-        </MotiView>
-      </View>
-      <View style={styles.formContainer}>
-        {showInputs && (
-          <>
-            <MotiView
-              from={{translateX: -100, opacity: 0}}
-              animate={{translateX: 0, opacity: 1}}
-              transition={{type: 'timing', duration: 1500}}
-              style={[styles.input, isSignUpEnabled && styles.inputValid]}>
-              <TextInput
-                placeholder="📧 Email"
-                style={styles.textInput}
-                placeholderTextColor="#333"
-                value={email}
-                onChangeText={setEmail}
-              />
-            </MotiView>
-            <MotiView
-              from={{translateX: 100, opacity: 0}}
-              animate={{translateX: 0, opacity: 1}}
-              transition={{type: 'timing', duration: 1500}}
-              style={[styles.input, isSignUpEnabled && styles.inputValid]}>
-              <TextInput
-                placeholder="🔒 Password"
-                style={styles.textInput}
-                placeholderTextColor="#333"
-                secureTextEntry
-                value={password}
-                onChangeText={setPassword}
-              />
-            </MotiView>
-          </>
-        )}
-        {showButtons && (
+        className="flex-1 items-center justify-start bg-dark h-full flex"
+        colors={['#8007d9', '#333']} // Gradient não usa Tailwind diretamente
+        start={{x: 0, y: 0}}
+        end={{x: 1, y: 1}}>
+        <View className="mt-24 items-center">
           <MotiView
-            from={{translateY: 100, opacity: 0}}
+            from={{translateY: -100, opacity: 0}}
             animate={{translateY: 0, opacity: 1}}
-            transition={{type: 'timing', duration: 1500}}
-            style={styles.buttonRow}>
-            <TouchableOpacity
-              style={styles.buttonContainer}
-              disabled={!isSignUpEnabled}>
-              <View
-                style={[
-                  styles.buttonStyle,
-                  styles.buttonEnable,
-                  !isSignUpEnabled && styles.disabledButton,
-                ]}>
-                <Text style={styles.buttonText}>Sign Up ✍️</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonContainer}>
-              <View style={[styles.buttonStyle, styles.buttonEnable]}>
-                <Text style={styles.buttonText}>Sign In 🔑</Text>
-              </View>
-            </TouchableOpacity>
+            transition={{type: 'timing', duration: 1000}}>
+            <Animated.View style={animatedStyle}>
+              <MotiText className="text-2xl text-light">
+                🚀 Aw3s0m3 Pr0j3ct 🚀
+              </MotiText>
+            </Animated.View>
           </MotiView>
-        )}
-      </View>
-    </LinearGradient>
+        </View>
+        <View className="flex-1 items-center justify-center w-full -top-20">
+          {showInputs && (
+            <>
+              <MotiView
+                from={{translateX: -100, opacity: 0}}
+                animate={{translateX: 0, opacity: 1}}
+                transition={{type: 'timing', duration: 1500}}
+                className={`w-4/5 my-2 rounded-xl bg-light ${
+                  isSignUpEnabled ? 'border-2 border-accent' : 'border border-muted'
+                }`}>
+                <TextInput
+                  placeholder="📧 Email"
+                  className="h-12 px-3 text-dark"
+                  placeholderTextColor="#333"
+                  value={email}
+                  onChangeText={setEmail}
+                />
+              </MotiView>
+              <MotiView
+                from={{translateX: 100, opacity: 0}}
+                animate={{translateX: 0, opacity: 1}}
+                transition={{type: 'timing', duration: 1500}}
+                className={`w-4/5 my-2 rounded-xl bg-light ${
+                  isSignUpEnabled ? 'border-2 border-accent' : 'border border-muted'
+                }`}>
+                <TextInput
+                  placeholder="🔒 Password"
+                  className="h-12 px-3 text-dark"
+                  placeholderTextColor="#333"
+                  secureTextEntry
+                  value={password}
+                  onChangeText={setPassword}
+                />
+              </MotiView>
+            </>
+          )}
+          {showButtons && (
+            <MotiView
+              from={{translateY: 100, opacity: 0}}
+              animate={{translateY: 0, opacity: 1}}
+              transition={{type: 'timing', duration: 1500}}
+              className="flex-row justify-between w-4/5 mt-5">
+              <TouchableOpacity
+                className={`flex-1 mx-1 rounded-lg border-2 ${
+                  isSignUpEnabled
+                    ? 'bg-primary border-light'
+                    : 'bg-muted border-muted'
+                }`}
+                disabled={!isSignUpEnabled}>
+                <View className="h-12 items-center justify-center">
+                  <Text className="text-lg text-light">Sign Up ✍️</Text>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity className="flex-1 mx-1 bg-primary rounded-lg border-2 border-light">
+                <View className="h-12 items-center justify-center">
+                  <Text className="text-lg text-light">Sign In 🔑</Text>
+                </View>
+              </TouchableOpacity>
+            </MotiView>
+          )}
+        </View>
+      </LinearGradient>
+
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    backgroundColor: '#1a1a1a',
-  },
-  formContainer: {
-    top: -80,
-    flex: 1,
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  topView: {
-    marginTop: 100,
-    alignItems: 'center',
-  },
-  topText: {
-    fontSize: 24,
-    color: '#fff',
-  },
-  input: {
-    width: '80%',
-    marginVertical: 10,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 10,
-    backgroundColor: '#fff',
-  },
-  inputValid: {
-    borderColor: '#36092b',
-    borderWidth: 3,
-  },
-  textInput: {
-    height: 50,
-    padding: 10,
-  },
-  buttonRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '80%',
-    marginTop: 20,
-  },
-  buttonContainer: {
-    flex: 1,
-    marginHorizontal: 5,
-  },
-  buttonStyle: {
-    height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 10,
-    borderWidth: 2,
-    borderColor: '#fff',
-  },
-  signUpButton: {
-    backgroundColor: '#ccc',
-  },
-  buttonEnable: {
-    backgroundColor: '#4B0082',
-  },
-  disabledButton: {
-    backgroundColor: '#ccc',
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 18,
-  },
-});
