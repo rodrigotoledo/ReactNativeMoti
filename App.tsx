@@ -1,6 +1,6 @@
 import './global.css'
-import 'react-native-reanimated';
-import 'react-native-gesture-handler';
+import 'react-native-reanimated'
+import 'react-native-gesture-handler'
 import React, {useState, useEffect} from 'react';
 import {View, Text, TextInput, TouchableOpacity} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
