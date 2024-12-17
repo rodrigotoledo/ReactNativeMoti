@@ -33,9 +33,10 @@ Before you begin, ensure you have met the following requirements:
 
 3. Install Moti:
 
-   ```bash
-   npm install moti
-   ```
+  ```bash
+  npm install
+  npm i moti --legacy-peer-deps
+  ```
 
 ## Usage
 
