@@ -27,6 +27,7 @@ export default function App() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    console.log(NEWSDATA_KEY);
     if (showButtons) {
       const fetchNews = async () => {
         try {
@@ -48,7 +49,7 @@ export default function App() {
       fetchNews();
     }
   }, [showButtons]);
-  
+
   const scale = useSharedValue(1);
 
   useEffect(() => {
